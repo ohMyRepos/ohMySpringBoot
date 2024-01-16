@@ -5,7 +5,7 @@
     <groupId>co.zhanglintc</groupId>
     <artifactId>ohMySpringBoot</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>ohMySpringBoot</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -62,7 +62,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>co.zhanglintc.ohMySpringBoot.OhMySpringBootApplication</mainClass>
-                    <skip>true</skip>
+                    <skip>false</skip>
                 </configuration>
                 <executions>
                     <execution>
