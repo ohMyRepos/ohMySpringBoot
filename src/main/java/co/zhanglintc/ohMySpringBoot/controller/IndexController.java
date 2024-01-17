@@ -17,7 +17,7 @@ public class IndexController {
     @RequestMapping("/")
     public Object index() {
         String sql = "select * from Student";
-        Object object = jdbcTemplate.queryForList(sql);
+        // Object object = jdbcTemplate.queryForList(sql);
         return person;
     }
 }
