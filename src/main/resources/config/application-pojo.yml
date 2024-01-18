@@ -1,4 +1,5 @@
-person:
+student:
+  id: 999
   name: zhang
   age: 12
   email: i@zhanglintc.co

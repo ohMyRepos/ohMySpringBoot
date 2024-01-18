@@ -8,3 +8,8 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: root
+
+mybatis:
+  type-aliases-package: co.zhanglintc.ohMySpringBoot.pojo
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml
