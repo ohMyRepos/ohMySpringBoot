@@ -2,12 +2,12 @@ package co.zhanglintc.ohMySpringBoot.controller;
 
 import co.zhanglintc.ohMySpringBoot.mapper.StudentMapper;
 import co.zhanglintc.ohMySpringBoot.pojo.Student;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.sql.DataSource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,6 +17,8 @@ public class IndexController {
     JdbcTemplate jdbcTemplate;
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    SqlSession sqlSession;
 
     @Autowired
     Student student;
@@ -39,6 +41,9 @@ public class IndexController {
 
         Object mybatisMapperResultMiddle = studentMapper.selectStudents();
         restResult.put("mybatisMapperResultMiddle", mybatisMapperResultMiddle);
+
+        Object sqlSessionResult = sqlSession.selectList("co.zhanglintc.ohMySpringBoot.mapper.StudentMapper.selectStudents");
+        restResult.put("sqlSessionResult", sqlSessionResult);
 
         studentMapper.deleteStudentById(student.getId());
         Object mybatisMapperResultAfter = studentMapper.selectStudents();
