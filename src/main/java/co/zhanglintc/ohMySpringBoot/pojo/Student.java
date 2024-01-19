@@ -1,5 +1,6 @@
 package co.zhanglintc.ohMySpringBoot.pojo;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 @Component
 @Validated
 @ConfigurationProperties(prefix = "student")
+@Alias("Student")
 public class Student {
     private int id;
     private String name;
