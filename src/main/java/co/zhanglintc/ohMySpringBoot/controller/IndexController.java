@@ -49,8 +49,11 @@ public class IndexController {
 
         QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("id", "name");
-        List<Student> queryWrapperResult = studentMapper.selectList(queryWrapper);
-        restResult.put("queryWrapperResult", queryWrapperResult);
+
+        List<Map<String, Object>> selectMapsResult = studentMapper.selectMaps(queryWrapper);
+        restResult.put("selectMapsResult", selectMapsResult);
+        List<Student> selectListResult = studentMapper.selectList(queryWrapper);
+        restResult.put("selectListResult", selectListResult);
 
         studentMapper.deleteStudentById(student.getId());
         Object mybatisMapperResultAfter = studentMapper.selectStudents();
