@@ -2,6 +2,7 @@ package co.zhanglintc.ohMySpringBoot.controller;
 
 import co.zhanglintc.ohMySpringBoot.mapper.StudentMapper;
 import co.zhanglintc.ohMySpringBoot.pojo.Student;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,6 +46,11 @@ public class IndexController {
 
         Object sqlSessionResult = sqlSession.selectList("co.zhanglintc.ohMySpringBoot.mapper.StudentMapper.selectStudents");
         restResult.put("sqlSessionResult", sqlSessionResult);
+
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id", "name");
+        List<Student> queryWrapperResult = studentMapper.selectList(queryWrapper);
+        restResult.put("queryWrapperResult", queryWrapperResult);
 
         studentMapper.deleteStudentById(student.getId());
         Object mybatisMapperResultAfter = studentMapper.selectStudents();
