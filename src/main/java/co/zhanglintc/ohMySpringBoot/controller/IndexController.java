@@ -29,32 +29,44 @@ public class IndexController {
     public Object index() {
         Map<String, Object> restResult = new LinkedHashMap<>();
 
+        // 删除表中全部数据
+        studentMapper.delete(null);
+
+        // 普通Bean
         restResult.put("Student", student);
 
+        // jdbcTemplate
         String sql = "select * from Student";
         Object jdbcTemplateResult = jdbcTemplate.queryForList(sql);
         restResult.put("jdbcTemplateResult", jdbcTemplateResult);
 
+        // selectStudents
         Object mybatisMapperResultBefore = studentMapper.selectStudents();
         restResult.put("mybatisMapperResultBefore", mybatisMapperResultBefore);
 
+        // insertStudent
         Student student = new Student("tom", 22, "bigboos@tom.com");
         studentMapper.insertStudent(student);
 
+        // 确认结果
         Object mybatisMapperResultMiddle = studentMapper.selectStudents();
         restResult.put("mybatisMapperResultMiddle", mybatisMapperResultMiddle);
 
+        // sqlSession
         Object sqlSessionResult = sqlSession.selectList("co.zhanglintc.ohMySpringBoot.mapper.StudentMapper.selectStudents");
         restResult.put("sqlSessionResult", sqlSessionResult);
 
+        // 创建queryWrapper
         QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("id", "name");
 
+        // selectMaps与selectList
         List<Map<String, Object>> selectMapsResult = studentMapper.selectMaps(queryWrapper);
         restResult.put("selectMapsResult", selectMapsResult);
         List<Student> selectListResult = studentMapper.selectList(queryWrapper);
         restResult.put("selectListResult", selectListResult);
 
+        // deleteStudentById并确认结果
         studentMapper.deleteStudentById(student.getId());
         Object mybatisMapperResultAfter = studentMapper.selectStudents();
         restResult.put("mybatisMapperResultAfter", mybatisMapperResultAfter);
