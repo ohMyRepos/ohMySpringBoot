@@ -73,4 +73,10 @@ public class IndexController {
 
         return restResult;
     }
+
+    @RequestMapping("/filterAndInterceptor")
+    public Object filterAndInterceptor() {
+        System.out.println("in function filterAndInterceptor");
+        return "filter & interceptor";
+    }
 }
