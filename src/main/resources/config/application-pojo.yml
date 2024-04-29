@@ -1,5 +1,5 @@
 student:
   id: 999
-  name: zhang
+  name: ${studentName:noNameGiven}
   age: 12
   email: i@zhanglintc.co

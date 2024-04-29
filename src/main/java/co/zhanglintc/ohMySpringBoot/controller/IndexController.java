@@ -5,6 +5,7 @@ import co.zhanglintc.ohMySpringBoot.pojo.Student;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,9 @@ public class IndexController {
 
     @Autowired
     Student student;
+
+    @Autowired
+    private Environment env;
 
     @RequestMapping("/")
     public Object index() {
@@ -77,6 +81,7 @@ public class IndexController {
     @RequestMapping("/filterAndInterceptor")
     public Object filterAndInterceptor() {
         System.out.println("in function filterAndInterceptor");
+        System.out.println(env.getProperty("student.name"));
         return "filter & interceptor";
     }
 }
